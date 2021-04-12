@@ -1,11 +1,14 @@
 import { Router } from 'express';
 import { logRequests } from './middleware/logRequest';
-const router = Router();
+import { UserController } from './controller/UserController';
 
-router.get("/", logRequests, (req, res) => {
-  res.send("hello World!");
-  console.log("entrou em root");
+const router = Router();
+const userController = new UserController();
+
+router.get('/', logRequests, (req, res) => {
+  res.send('hello World!');
 });
 
+router.post('/signup', userController.signUp);
 
 export default router;
